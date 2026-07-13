@@ -1,0 +1,30 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>База знаний ИТО — Обзор</title><link rel="stylesheet" href="assets/styles.css"></head><body>
+<div data-header></div><div class="layout"><div data-sidebar></div><main class="main">
+  <div class="page-head"><div><div class="eyebrow">Рабочая система инженерно-технического отдела</div><h1>База знаний ИТО</h1><p class="lead">Шаблоны технических задач, нормативные роли и конструктор графика реализации проекта. Состав проекта формируется из проверяемых результатов, а Гант пересчитывается по длительностям и зависимостям.</p></div><div class="page-actions"><a class="btn btn-primary" href="planner.html">Открыть планировщик</a><a class="btn" href="templates.html">Каталог задач</a></div></div>
+
+  <section class="card hero-panel">
+    <div class="hero-copy"><div class="eyebrow">Главная механика MVP</div><h2>Соберите технический график перетаскиванием готовых задач</h2><p>Каждый шаблон уже содержит этап, нормативную длительность, исполнителя, проверяющего, входные данные, результаты и критерии приёмки. После добавления задачи в проект система автоматически рассчитывает даты и обновляет Гант.</p><div class="hero-actions"><a class="btn btn-primary" href="planner.html?preset=full">Собрать полный цикл</a><a class="btn" href="planner.html?preset=sks">Открыть шаблон СКС</a></div></div>
+    <div class="mini-gantt" aria-label="Пример графика"><div class="mini-row"><div class="mini-label">Обследование</div><div class="mini-track"><div class="mini-bar" style="width:31%"></div></div></div><div class="mini-row"><div class="mini-label">Проектирование</div><div class="mini-track"><div class="mini-bar" style="width:67%;margin-left:18%"></div></div></div><div class="mini-row"><div class="mini-label">Закупки</div><div class="mini-track"><div class="mini-bar" style="width:46%;margin-left:43%"></div></div></div><div class="mini-row"><div class="mini-label">Монтаж</div><div class="mini-track"><div class="mini-bar" style="width:38%;margin-left:53%"></div></div></div><div class="mini-row"><div class="mini-label">ПНР и сдача</div><div class="mini-track"><div class="mini-bar" style="width:28%;margin-left:71%"></div></div></div></div>
+  </section>
+
+  <section class="grid grid-4 section">
+    <div class="card card-pad metric"><div class="metric-label">Исходная база</div><div class="metric-value accent">412</div><div class="metric-note">проанализированных реальных задач отдела</div></div>
+    <div class="card card-pad metric"><div class="metric-label">Шаблоны MVP</div><div class="metric-value">31</div><div class="metric-note">задач полного цикла технической реализации</div></div>
+    <div class="card card-pad metric"><div class="metric-label">Сотрудники ИТО</div><div class="metric-value">11</div><div class="metric-note">актуальные роли и правила проверки результата</div></div>
+    <div class="card card-pad metric"><div class="metric-label">Структура проекта</div><div class="metric-value">08</div><div class="metric-note">этапов от запуска до технической сдачи</div></div>
+  </section>
+
+  <section class="section"><div class="section-head"><div class="section-title">На чём построена новая модель</div><div class="section-note">Ключевые выводы анализа</div></div><div class="grid grid-3 insight-list">
+    <div class="insight"><strong>Крупная задача — не контейнер времени</strong><span>Вместо общей задачи «техническая реализация» база формирует фазовый набор проверяемых результатов.</span></div>
+    <div class="insight"><strong>Руководитель не подменяет исполнителя</strong><span>Владелец, исполнитель, проверяющий и принимающий разделены. Контроль не требует назначения руководителя непосредственным исполнителем.</span></div>
+    <div class="insight"><strong>Срок следует из состава работ</strong><span>Финиш проекта рассчитывается из выбранных задач, рабочих дней, лагов и связей между этапами.</span></div>
+  </div></section>
+
+  <section class="section"><div class="section-head"><div class="section-title">Единый маршрут задачи</div><div class="section-note">От входа до приёмки</div></div><div class="process-flow">
+    <div class="process-step"><div class="process-num">01</div><strong>Входные данные</strong><span>Версия, источник, полнота и владелец пробелов.</span></div>
+    <div class="process-step"><div class="process-num">02</div><strong>Исполнение</strong><span>Конкретный результат, срок и границы самостоятельности.</span></div>
+    <div class="process-step"><div class="process-num">03</div><strong>Самопроверка</strong><span>Чек-лист, комплектность и фиксация отклонений.</span></div>
+    <div class="process-step"><div class="process-num">04</div><strong>Техническое ревью</strong><span>Профильный старший специалист или ГИП.</span></div>
+    <div class="process-step"><div class="process-num">05</div><strong>Приёмка</strong><span>Закрытие замечаний и размещение артефактов.</span></div>
+  </div></section>
+</main></div><script src="assets/data.js"></script><script src="assets/app.js"></script></body></html>
