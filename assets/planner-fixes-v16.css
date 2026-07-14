@@ -1,6 +1,6 @@
 /* Planner layout and readability fixes v1.6 */
 
-/* Wider, stable task library */
+/* Wider and stable template library */
 .planner-shell {
   grid-template-columns: minmax(420px, 450px) minmax(0, 1fr);
   gap: 20px;
@@ -62,4 +62,127 @@
   line-height: 1.45;
   white-space: normal;
   overflow: visible;
- 
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.catalog-task p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: normal;
+  overflow: visible;
+}
+
+.catalog-task-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 7px 12px;
+  margin-top: 11px;
+}
+
+.add-circle {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  align-self: start;
+  justify-self: end;
+}
+
+/* Explicit labels over inline task controls */
+.task-grid-head-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-3);
+}
+
+.task-grid-head {
+  min-width: 1120px;
+  display: grid;
+  grid-template-columns: 34px minmax(280px, 1.8fr) 155px 86px minmax(170px, 1fr) 102px 102px;
+  gap: 10px;
+  align-items: end;
+  padding: 11px 15px 10px;
+  color: #526574;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.task-grid-head > div {
+  min-width: 0;
+}
+
+.task-grid-head .task-head-note {
+  display: block;
+  margin-top: 3px;
+  color: #71818d;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.task-list {
+  overflow-x: auto;
+}
+
+.task-row {
+  min-width: 1120px;
+  grid-template-columns: 34px minmax(280px, 1.8fr) 155px 86px minmax(170px, 1fr) 102px 102px;
+}
+
+.task-row .input,
+.task-row .select {
+  height: 42px;
+  font-size: 13px;
+}
+
+.task-name {
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.task-sub {
+  font-size: 11px;
+}
+
+/* Prevent collisions in the plan header */
+.plan-head,
+.gantt-head {
+  flex-wrap: wrap;
+}
+
+.gantt-controls {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1320px) {
+  .planner-shell {
+    grid-template-columns: minmax(360px, 390px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .planner-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-panel {
+    position: relative;
+    top: auto;
+    height: auto;
+    max-height: 650px;
+  }
+}
+
+@media (max-width: 640px) {
+  .task-grid-head-wrap {
+    display: none;
+  }
+
+  .catalog-task h4 {
+    font-size: 14px;
+  }
+}
