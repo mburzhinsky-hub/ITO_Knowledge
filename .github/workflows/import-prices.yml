@@ -1,0 +1,65 @@
+name: Import price lists
+
+on:
+  push:
+    paths:
+      - ito_prices_lazy_overlay.zip
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check archive
+        run: |
+          test -f ito_prices_lazy_overlay.zip || {
+            echo "Upload ito_prices_lazy_overlay.zip to the repository root first."
+            exit 1
+          }
+
+      - name: Extract price module
+        run: |
+          unzip -o ito_prices_lazy_overlay.zip
+          rm -f ito_prices_lazy_overlay.zip
+          rm -f README_IMPORT.md
+
+      - name: Add price lists to navigation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('assets/app.js')
+          text = path.read_text(encoding='utf-8')
+          old = "    ['roles.html', 'Роли ИТО'],\n    ['planner.html', 'Планировщик проекта']"
+          new = "    ['roles.html', 'Роли ИТО'],\n    ['prices.html', 'Прайс-листы'],\n    ['planner.html', 'Планировщик проекта']"
+          if "['prices.html', 'Прайс-листы']" not in text:
+              if old not in text:
+                  raise SystemExit('Navigation marker was not found in assets/app.js')
+              text = text.replace(old, new)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate imported files
+        run: |
+          test -f prices.html
+          test -f assets/prices.css
+          test -f assets/prices.js
+          test -f assets/prices-data/index.json
+          for file in assets/prices-data/pack-01.txt assets/prices-data/pack-02.txt assets/prices-data/pack-03.txt assets/prices-data/pack-04.txt; do
+            test -s "$file"
+          done
+          python3 -m json.tool assets/prices-data/index.json >/dev/null
+          node --check assets/prices.js
+
+      - name: Commit imported price lists
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prices.html assets/prices.css assets/prices.js assets/prices-data assets/app.js
+          git commit -m "Добавить прайс-листы с ленивой загрузкой" || exit 0
+          git push
