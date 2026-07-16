@@ -1,6 +1,8 @@
 (() => {
-  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1KkTkUoWdDEakPGrq3wijk5Q5Ltm-enCLr3zEmUZ9uFM/preview?gid=1775919143';
-  const SOURCE_URL = 'https://docs.google.com/spreadsheets/d/1KkTkUoWdDEakPGrq3wijk5Q5Ltm-enCLr3zEmUZ9uFM/edit?gid=1775919143#gid=1775919143';
+  const SHEET_ID = '1KkTkUoWdDEakPGrq3wijk5Q5Ltm-enCLr3zEmUZ9uFM';
+  const GID = '1775919143';
+  const EMBED_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/htmlembed?gid=${GID}&single=true&widget=true&headers=false`;
+  const SOURCE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?gid=${GID}#gid=${GID}`;
 
   function addMenuLink() {
     const group = document.querySelector('.sidebar .nav-group');
@@ -12,6 +14,12 @@
     group.appendChild(link);
   }
 
+  function showFallback(loader) {
+    if (!loader) return;
+    loader.classList.remove('hidden');
+    loader.innerHTML = `<strong>Google Sheets не разрешил встроенный просмотр</strong><span>Откройте таблицу напрямую — доступ и редактирование сохранятся.</span><a class="btn btn-primary" href="${SOURCE_URL}" target="_blank" rel="noopener noreferrer">Открыть таблицу</a>`;
+  }
+
   function init() {
     addMenuLink();
     const iframe = document.getElementById('overtimeFrame');
@@ -19,9 +27,15 @@
     const openBtn = document.getElementById('openOvertimeSource');
     if (openBtn) openBtn.href = SOURCE_URL;
     if (!iframe) return;
-    iframe.addEventListener('load', () => loader?.classList.add('hidden'));
-    requestAnimationFrame(() => { iframe.src = SHEET_URL; });
-    setTimeout(() => loader?.classList.add('hidden'), 12000);
+
+    let loaded = false;
+    iframe.addEventListener('load', () => {
+      loaded = true;
+      loader?.classList.add('hidden');
+    });
+
+    requestAnimationFrame(() => { iframe.src = EMBED_URL; });
+    setTimeout(() => { if (!loaded) showFallback(loader); }, 10000);
   }
 
   document.addEventListener('DOMContentLoaded', init);
